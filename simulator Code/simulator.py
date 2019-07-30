@@ -4,11 +4,7 @@ wb = load_workbook("userform-scm.xlsm")
 
 sh = wb['Sheet1']
 
-import numpy as np
-import operator
-from IPython.display import display
-import pandas as pd
-from pulp import *
+
 
 #Clarke-Wright Savings Algorithm
 class CWSA(object):
@@ -55,7 +51,7 @@ def CWSA_dist_matrix(cwsa):
         else:
             CWSA_mtx[from_node-1,-1] = dist_dict[(from_node,to_node)]
     return CWSA_mtx
-
+print("successfully run SCM")
 def CWSA_savings(cwsa):
     '''
     Given cwsa object, provide savings and distance table of
