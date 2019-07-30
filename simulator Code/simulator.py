@@ -61,13 +61,7 @@ def CWSA_savings(cwsa):
     Given cwsa object, provide savings and distance table of
     argument:
     (object): cwsa object with complete distances attribute added by add_dist
-              function
-    output:
-    CWSA_dict(dataframe): 1st column   = index
-                          2nd column   = (from_node,to_node)
-                          3rd column   = distance/cost saving for these nodes
-    CWSA_mtx (dataframe): distance/cost (above diagonal element) and
-                          saving (below diagonal element) of each pair of nodes
+
     '''
     CWSA_mtx = CWSA_dist_matrix(cwsa)
     CWSA_dict = {}
@@ -83,19 +77,7 @@ def CWSA_savings(cwsa):
     return CWSA_df,CWSA_savings_df
 
 def MPS_MILP(demand_forecast,setup_cost,holding_cost,init_inventory):
-    '''
-    MPS using Mixed Integer Linear Programming
-    argument:
-    demand_forecast (list): demand for each time period
-    setup_cost (float): fixed cost of setting up manufacturing
-    holding_cost (float): fixed cost of init_inventory
-    init_inventory(float): initial inventory
-    output:
-    status (string): status of mixed integer linear programming
-    inventory (list): inventory for each time period
-    prod_schedule (list): production schedule for each time period
-    total_cost (float): total cost of manufacturing and inventory
-    '''
+
 
     #Problem statement
     prob = LpProblem('project',LpMinimize)
@@ -163,18 +145,7 @@ def MPS_MILP(demand_forecast,setup_cost,holding_cost,init_inventory):
     return status,inventory,prod_schedule,total_cost
 
 def MPS_onetime(demand_forecast,setup_cost,holding_cost,init_inventory):
-    '''
-    MPS using One Time strategy
-    argument:
-    demand_forecast (list): demand for each time period
-    setup_cost (float): fixed cost of setting up manufacturing
-    holding_cost (float): fixed cost of init_inventory
-    init_inventory(float): initial inventory
-    output:
-    inventory (list): inventory for each time period
-    quantity (list): quantity of product manufactured for each time period
-    total_cost (float): total cost of manufacturing and inventory
-    '''
+
     prod_qty = (np.sum(demand_forecast)-init_inventory)
     prod_schedule = [0 for i in range(len(demand_forecast))]
     prod_schedule[0] = prod_qty
@@ -197,18 +168,7 @@ def MPS_onetime(demand_forecast,setup_cost,holding_cost,init_inventory):
     return inventory,prod_schedule,total_cost
 
 def MPS_chase(demand_forecast,setup_cost,holding_cost,init_inventory):
-    '''
-    MPS using Chase strategy.
-    argument:
-    demand_forecast (list): demand for each time period
-    setup_cost (float): fixed cost of setting up manufacturing
-    holding_cost (float): fixed cost of init_inventory
-    init_inventory(float): initial inventory
-    output:
-    inventory (list): inventory for each time period
-    quantity (list): quantity of product manufactured for each time period
-    total_cost (float): total cost of manufacturing and inventory
-    '''
+
 
     prod_schedule = []
     inventory = []
@@ -253,18 +213,6 @@ def MPS_chase(demand_forecast,setup_cost,holding_cost,init_inventory):
     return inventory,prod_schedule,total_cost
 
 def MPS_silvermeal(demand_forecast,setup_cost,holding_cost,init_inventory):
-    '''
-    MPS using Silver Meal strategy.
-    argument:
-    demand_forecast (list): demand for each time period
-    setup_cost (float): fixed cost of setting up manufacturing
-    holding_cost (float): fixed cost of init_inventory
-    init_inventory(float): initial inventory
-    output:
-    inventory (list): inventory for each time period
-    quantity (list): quantity of product manufactured for each time period
-    total_cost (float): total cost of manufacturing and inventory
-    '''
 
     prod_schedule = []
     inventory = []
@@ -330,15 +278,7 @@ def MPS_silvermeal(demand_forecast,setup_cost,holding_cost,init_inventory):
 
 def MPS_FOQ(Q,demand_forecast,setup_cost,holding_cost,init_inventory):
     '''
-    MPS using Fixed Order Quantity strategy.
-    argument:
-    Q (float): economic order quantity
-    demand_forecast (list): demand for each time period
-    setup_cost (float): fixed cost of setting up manufacturing
-    holding_cost (float): fixed cost of init_inventory
-    init_inventory(float): initial inventory
-    output:
-    inventory (list): inventory for each time period
+
     quantity (list): quantity of product manufactured for each time period
     total_cost (float): total cost of manufacturing and inventory
     '''
@@ -396,16 +336,7 @@ def MPS_FOQ(Q,demand_forecast,setup_cost,holding_cost,init_inventory):
 
 def MPS_POQ(t,demand_forecast,setup_cost,holding_cost,init_inventory):
     '''
-    MPS using Periodic Order Quantity strategy.
-    argument:
-    t (float): interval time period between productions
-    demand_forecast (list): demand for each time period
-    setup_cost (float): fixed cost of setting up manufacturing
-    holding_cost (float): fixed cost of init_inventory
-    init_inventory(float): initial inventory
-    output:
-    inventory (list): inventory for each time period
-    quantity (list): quantity of product manufactured for each time period
+
     total_cost (float): total cost of manufacturing and inventory
     '''
 
